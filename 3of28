@@ -1,0 +1,37 @@
+package eleven;
+import java.math.BigInteger;
+
+public class FibonacciUtils {
+    public static String getFibonacciSum(byte limit) {
+        // Если передано отрицательное число, возвращаем "0"
+        if (limit < 0) {
+            return "0";
+        }
+
+        BigInteger sum = BigInteger.ZERO;  // Переменная для хранения суммы чисел
+        BigInteger a = BigInteger.ZERO;    // Первое число Фибоначчи (F0)
+        BigInteger b = BigInteger.ONE;     // Второе число Фибоначчи (F1)
+
+        // Перебор чисел Фибоначчи и их суммирование
+        for (int i = 0; i <= limit; i++) {
+            sum = sum.add(a);  // Добавляем текущее число Фибоначчи в сумму
+
+            // Обновляем числа Фибоначчи
+            BigInteger next = a.add(b);
+            a = b;
+            b = next;
+        }
+
+        return sum.toString();  // Возвращаем сумму в виде строки
+    }
+
+    private FibonacciUtils() {
+        // Закрытый конструктор, чтобы предотвратить создание экземпляров
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Сумма чисел Фибоначчи до 5 должна равняться 7 - " + FibonacciUtils.getFibonacciSum((byte) 5));  // Ожидаемый результат: 7
+        System.out.println("Сумма чисел Фибоначчи до 2 должна равняться 1 - " + FibonacciUtils.getFibonacciSum((byte) 2));  // Ожидаемый результат: 1
+        System.out.println("Сумма чисел Фибоначчи для отрицательного значения - " + FibonacciUtils.getFibonacciSum((byte) -3));  // Ожидаемый результат: 0
+    }
+}
