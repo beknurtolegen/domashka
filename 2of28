@@ -1,0 +1,30 @@
+package eleven;
+public class BracketUtil {
+    public static boolean isCorrectBrackets(String input, char bracketOpenSymbol, char bracketCloseSymbol) {
+        int balance = 0;
+
+        for (char ch : input.toCharArray()) {
+            if (ch == bracketOpenSymbol) {
+                balance++;
+            } else if (ch == bracketCloseSymbol) {
+                balance--;
+                if (balance < 0) {
+                    return false; // Закрывающая скобка встретилась раньше открывающей
+                }
+            }
+        }
+        return balance == 0; // Все скобки сбалансированы
+    }
+
+    private BracketUtil() {
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Ввод равного количества открывающих и закрывающих скобок - "
+                + BracketUtil.isCorrectBrackets("{{}}", '{', '}')); // Должно вернуть true
+        System.out.println("Ввод неравного количества открывающих и закрывающих скобок - "
+                + BracketUtil.isCorrectBrackets("{{}}}", '{', '}')); // Должно вернуть false
+        System.out.println("Некорректный порядок скобок - "
+                + BracketUtil.isCorrectBrackets("}{", '{', '}')); // Должно вернуть false
+    }
+}
